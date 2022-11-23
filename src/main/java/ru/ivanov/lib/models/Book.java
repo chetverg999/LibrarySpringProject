@@ -1,6 +1,7 @@
 package ru.ivanov.lib.models;
 
 import javax.validation.constraints.*;
+import java.util.List;
 
 /**
  * @author Ivanov Alexandr on 06.11.2022

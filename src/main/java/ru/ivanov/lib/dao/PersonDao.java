@@ -1,7 +1,6 @@
 package ru.ivanov.lib.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import ru.ivanov.lib.models.Person;
@@ -33,6 +32,11 @@ public class PersonDao {
 //                        new BeanPropertyRowMapper<>(Person.class)
                 )
                 .stream().findAny().orElse(null);
+    }
+
+    public Person showPerson(int id) {
+        return jdbcTemplate.query("SELECT * FROM person JOIN book on book.person_id = person.person_id WHERE book.book_id=?",
+                new Object[]{id}, new PersonMapper()).stream().findAny().orElse(null);
     }
 
 

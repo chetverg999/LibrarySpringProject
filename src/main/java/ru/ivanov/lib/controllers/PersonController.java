@@ -55,6 +55,7 @@ public class PersonController {
     @GetMapping("/{id}") // страница данного человека по его айди
     public String show(@PathVariable("id") int id, Model model) {
         model.addAttribute("person", personDao.show(id));
+        model.addAttribute("personBooks", bookDao.showBooks(id));
         return "people/show";
     }
 

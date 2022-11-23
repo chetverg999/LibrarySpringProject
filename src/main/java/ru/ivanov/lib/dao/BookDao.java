@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import ru.ivanov.lib.models.Book;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -33,6 +35,12 @@ public class BookDao {
                 .stream().findAny().orElse(null);
     }
 
+    public List<Book> showBooks(int id) {
+        return jdbcTemplate.query("SELECT * FROM book WHERE person_id=?",
+                        new Object[]{id}, new BookMapper());
+    }
+
+
     public void edit(Book book) {
         jdbcTemplate.update("INSERT INTO book(title, author, dateOfWriting) VALUES (?, ?, ?)",
                  book.getTitle(), book.getAuthor(), book.getDateOfWriting());
@@ -47,4 +55,8 @@ public class BookDao {
         jdbcTemplate.update("DELETE FROM book WHERE book_id=?", id);
     }
 
+
+    public void deletePerson(int id, Book book) {
+        jdbcTemplate.update("UPDATE book SET person_id=null WHERE book_id=?", id);
+    }
 }
