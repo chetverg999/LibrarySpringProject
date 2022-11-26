@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.ivanov.lib.dao.BookDao;
 import ru.ivanov.lib.dao.PersonDao;
 import ru.ivanov.lib.models.Book;
-
+import ru.ivanov.lib.models.Person;
 import javax.validation.Valid;
 
 /**
@@ -40,7 +40,7 @@ public class BookController {
     }
 
     @PostMapping()
-    public String create(@ModelAttribute("person") @Valid Book book,
+    public String create(@ModelAttribute("book") @Valid Book book,
                          BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
@@ -53,9 +53,10 @@ public class BookController {
 
 
     @GetMapping("/{id}")
-    public String show(@PathVariable("id") int id, Model model) {
+    public String show(@PathVariable("id") int id, Model model, @ModelAttribute("person") Person person) {
         model.addAttribute("book", bookDao.show(id));
         model.addAttribute("bookPerson", personDao.showPerson(id));
+        model.addAttribute("people", personDao.index());
         return "books/show";
     }
 
@@ -65,7 +66,7 @@ public class BookController {
         return "books/edit";
     }
 
-    @PatchMapping("/{id}")
+    @PatchMapping("/{id}/edit")
     public String update(@ModelAttribute("book") @Valid Book book, BindingResult bindingResult,
                          @PathVariable("id") int id) {
 
@@ -74,6 +75,20 @@ public class BookController {
         }
 
         bookDao.update(id, book);
+        return "redirect:/books";
+    }
+
+    @PatchMapping("/{id}/deletePerson")
+    public String deletePerson(@ModelAttribute("book") Book book,
+                         @PathVariable("id") int id) {
+        bookDao.deletePerson(id);
+        return "redirect:/books";
+    }
+
+    @PatchMapping("/{id}/addPerson")
+    public String addPerson(@ModelAttribute("book") Book book, @ModelAttribute("person") Person person,
+                               @PathVariable("id") int id) {
+        bookDao.addPerson(person.getId(), id);
         return "redirect:/books";
     }
 

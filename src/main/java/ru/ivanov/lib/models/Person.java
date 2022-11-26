@@ -12,7 +12,7 @@ public class Person {
 
     @NotEmpty(message = "Name should not be empty")
     @Size(min = 2, max = 30, message = "Name should be between 2 and 30 characters")
-    @Pattern(regexp = "[A-Z][a-zA-Z\\s]{2,}", message = "Name should be valid")
+    @Pattern(regexp = "[А-Я][а-яА-Я\\s]{2,}", message = "Имя должно быть валидным")
     private String name;
 
     @NotNull(message = "Year of birth should not be empty")

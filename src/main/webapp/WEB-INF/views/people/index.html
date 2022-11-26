@@ -5,7 +5,7 @@
     <title>Index</title>
 </head>
 <body>
-<h2>List of people</h2>
+<h2>Список читатаелей</h2>
 <div th:each="person : ${personDaoModel}">
     <a th:href="@{/people/{id}(id=${person.getId()})}"
        th:text="${person.getName() + ', ' + person.getDateOfBirth()}">user</a>
@@ -14,11 +14,11 @@
 <br/>
 <hr/>
 
-<a href="/people/new">Create new person</a>
+<a href="/people/new">Добавить читателя</a>
 <br/>
-<a href="/books/new">Create new book</a>
+<a href="/books/new">Добавить книгу</a>
 <br/>
-<a href="/books">List of books</a>
+<a href="/books">Список книг</a>
 
 </body>
 </html>

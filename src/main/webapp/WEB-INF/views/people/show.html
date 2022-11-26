@@ -10,12 +10,12 @@
 <p th:text="${'Порядковый номер: ' + person.getId()}">VALUE</p>
 
 <a>Список взятых книг</a>
-<div th:each="personBooks : ${personBooks}">
-    <a th:href="@{/books/{id}(id=${personBooks.getId()})}"
-       th:text="${personBooks.getTitle() + ', ' + personBooks.getAuthor()+ ', ' + personBooks.getDateOfWriting()}">book</a>
+<div th:if="${personBooks.size() != 0}" th:each="books : ${personBooks}">
+    <a th:href="@{/books/{id}(id=${books.getId})}"
+       th:text="${books.getTitle() + ', ' + books.getAuthor()+ ', ' + books.getDateOfWriting()}">book</a>
 </div>
 
-<div th:if="${personBooks == null}">
+<div th:if="${personBooks.size() == 0}">
     Человек пока не взял ни одной книги
 </div>
 <br/>

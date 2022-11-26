@@ -6,24 +6,24 @@
 </head>
 <body>
 
-<form th:method="PATCH" th:action="@{/books/{id}(id=${book.getId()})}" th:object="${book}">
+<form th:method="PATCH" th:action="@{/books/{id}/edit(id=${book.getId()})}" th:object="${book}">
 
-    <label for="title">Enter title: </label>
+    <label for="title">Введите название: </label>
     <input type="text" th:field="*{title}" id="title"/>
     <div style="color:red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Title Error</div>
     <br/>
 
-    <label for="author">Enter author: </label>
+    <label for="author">Введите автора: </label>
     <input type="text" th:field="*{author}" id="author"/>
     <div style="color:red" th:if="${#fields.hasErrors('author')}" th:errors="*{author}">Author Error</div>
     <br/>
 
-    <label for="dateOfWriting">Enter year of writing: </label>
+    <label for="dateOfWriting">Введите год написания: </label>
     <input type="text" th:field="*{dateOfWriting}" id="dateOfWriting"/>
     <div style="color:red" th:if="${#fields.hasErrors('dateOfWriting')}" th:errors="*{dateOfWriting}">Age Error</div>
     <br/>
 
-    <input type="submit" value="Update!"/>
+    <input type="submit" value="Обновить!"/>
 </form>
 
 </body>
